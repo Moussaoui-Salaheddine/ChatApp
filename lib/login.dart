@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: new Scaffold(
+    return new Scaffold(
           resizeToAvoidBottomPadding: false,
           body: new Container(
               decoration: new BoxDecoration(
@@ -19,80 +18,135 @@ class Login extends StatelessWidget {
                   child: Form(
                     child: Column(
                       children: <Widget>[
-                        new TextField(
-                          decoration: new InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.person,
-                                color: Colors.grey[800],
-                                size: 28,
-                              ),
-                              enabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              disabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              focusedBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              border: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "Username",
-                              fillColor: Colors.white),
+                        new TextFormField(
+                            decoration: new InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: Colors.grey[800],
+                                  size: 28,
+                                ),
+                                enabledBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                disabledBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                focusedBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                border: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                filled: true,
+                                hintStyle:
+                                    new TextStyle(color: Colors.grey[800]),
+                                hintText: "Username",
+                                fillColor: Colors.white),
+                            validator: (val) {
+                              if (val.length == 0) {
+                                return "Username cannot be empty";
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.text,
+                            style: new TextStyle(
+                              fontFamily: "Raleway",
+                              color: Colors.grey[800],
+                            )),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
                         ),
-                        Padding(padding: EdgeInsets.only(top: 20),),
-                        TextField(
-                          decoration: new InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.grey[800],
-                                size: 28,
+                        TextFormField(
+                            decoration: new InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: Colors.grey[800],
+                                  size: 28,
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.remove_red_eye,
+                                    color: Colors.grey[800],
+                                    size: 28,
+                                  ),
+                                ),
+                                enabledBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                disabledBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                focusedBorder: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                border: new OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                      const Radius.circular(30.0),
+                                    ),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                filled: true,
+                                hintStyle:
+                                    new TextStyle(color: Colors.grey[800]),
+                                hintText: "Password",
+                                fillColor: Colors.white),
+                            validator: (val) {
+                              if (val.length == 0) {
+                                return "Password cannot be empty";
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.text,
+                            style: new TextStyle(
+                              fontFamily: "Raleway",
+                              color: Colors.grey[800],
+                            )),
+                            Padding(padding: EdgeInsets.only(top: 50),),
+                            Container(
+                              height: 60,
+                              child: RaisedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => new Home()));
+                              },
+                              shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                                borderSide: BorderSide(color: Color.fromRGBO(255, 0, 169, 1.0))
                               ),
-                              suffixIcon: Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.grey[800],
-                                size: 28,
+                              color: Color.fromRGBO(255, 0, 169, 1.0),
+                              child: Center(
+                                child: Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Roboto"),),
                               ),
-                              enabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              disabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              focusedBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              border: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(30.0),
-                                  ),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              filled: true,
-                              hintStyle: new TextStyle(color: Colors.grey[800]),
-                              hintText: "Password",
-                              fillColor: Colors.white),
-                        ),
+                            ),
+                            )
                       ],
                     ),
-                  ))),
-        ));
+                  )
+                  )),
+        );
   }
 }
 
