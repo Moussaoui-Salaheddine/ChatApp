@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'chatpage.dart';
-import 'profile.dart';
 import 'package:flutter/cupertino.dart';
 
 class Home extends StatefulWidget {

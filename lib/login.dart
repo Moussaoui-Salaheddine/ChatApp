@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'signup.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,6 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _StateLogin extends State<Login> {
+  String _confirmpsd;
+  final _formKeysignin = GlobalKey<FormState>();
+  final _formKeysignup = GlobalKey<FormState>();
   Color personcolor = Colors.grey[800];
   void change() {
     this.setState(() {
@@ -43,6 +46,7 @@ class _StateLogin extends State<Login> {
               margin: EdgeInsets.only(top: 30, left: 20, right: 20),
               elevation: 8,
               child: Form(
+                key: _formKeysignin,
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -190,10 +194,21 @@ class _StateLogin extends State<Login> {
                             height: 60,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new Home()));
+                                if (_formKeysignin.currentState.validate()) {
+                                  SystemChrome.setEnabledSystemUIOverlays(
+                                      SystemUiOverlay.values);
+                                  SystemChrome.setSystemUIOverlayStyle(
+                                      SystemUiOverlayStyle.dark.copyWith(
+                                    statusBarIconBrightness: Brightness.dark,
+                                    systemNavigationBarColor: Colors.white,
+                                    systemNavigationBarIconBrightness:
+                                        Brightness.dark,
+                                  ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => new Home()));
+                                }
                               },
                               shape: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30.0),
@@ -245,6 +260,7 @@ class _StateLogin extends State<Login> {
               margin: EdgeInsets.only(top: 30, left: 20, right: 20),
               elevation: 8,
               child: Form(
+                key: _formKeysignup,
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -371,6 +387,7 @@ class _StateLogin extends State<Login> {
                                   hintText: "Choose a Password",
                                   fillColor: Colors.white),
                               validator: (val) {
+                                _confirmpsd = val.toString();
                                 if (val.length == 0) {
                                   return "Password cannot be empty";
                                 } else {
@@ -424,8 +441,8 @@ class _StateLogin extends State<Login> {
                                   hintText: "Confirm Password",
                                   fillColor: Colors.white),
                               validator: (val) {
-                                if (val.length == 0) {
-                                  return "Password cannot be empty";
+                                if (val.toString() != _confirmpsd) {
+                                  return "Password does not match";
                                 } else {
                                   return null;
                                 }
@@ -443,10 +460,22 @@ class _StateLogin extends State<Login> {
                             height: 60,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new Home()));
+                                if (_formKeysignup.currentState.validate()) {
+                                  SystemChrome.setEnabledSystemUIOverlays([]);
+                                  SystemChrome.setEnabledSystemUIOverlays(
+                                      SystemUiOverlay.values);
+                                  SystemChrome.setSystemUIOverlayStyle(
+                                      SystemUiOverlayStyle.dark.copyWith(
+                                    statusBarIconBrightness: Brightness.dark,
+                                    systemNavigationBarColor: Colors.white,
+                                    systemNavigationBarIconBrightness:
+                                        Brightness.dark,
+                                  ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => new Home()));
+                                }
                               },
                               shape: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30.0),
