@@ -9,14 +9,14 @@ class SignUp extends StatefulWidget {
 
 class _StateSignUp extends State<SignUp> {
   final _formKeysignup = GlobalKey<FormState>();
-  Color _eyecolor = Colors.white70;
+  Color _eyecolor = Colors.grey[800];
   bool eyepressed = false;
   bool _obsecurepsd = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
-      backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
+      backgroundColor: Colors.grey[200],
       body: Container(
         width: 1080,
         height: 1920,
@@ -43,7 +43,7 @@ class _StateSignUp extends State<SignUp> {
                           Container(
                             width: 320,
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.grey[800]),
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -57,11 +57,11 @@ class _StateSignUp extends State<SignUp> {
                                         color: Color.fromRGBO(84, 89, 167, 1.0),
                                         width: 3)),
                                 hintText: 'Your Email',
-                                hintStyle: TextStyle(color: Colors.white70),
+                                hintStyle: TextStyle(color: Colors.grey[800]),
                                 prefixIcon: Icon(
                                   Icons.mail,
-                                  color: Colors
-                                      .white70, //Color.fromRGBO(0, 165, 165, 1.0),
+                                  color: Colors.grey[
+                                      800], //Color.fromRGBO(0, 165, 165, 1.0),
                                 ),
                               ),
                               validator: (val) {
@@ -77,7 +77,7 @@ class _StateSignUp extends State<SignUp> {
                             margin: EdgeInsets.only(top: 20),
                             width: 320,
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.grey[800]),
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -91,11 +91,11 @@ class _StateSignUp extends State<SignUp> {
                                         color: Color.fromRGBO(84, 89, 167, 1.0),
                                         width: 3)),
                                 hintText: 'Pick a Username',
-                                hintStyle: TextStyle(color: Colors.white70),
+                                hintStyle: TextStyle(color: Colors.grey[800]),
                                 prefixIcon: Icon(
                                   Icons.person,
-                                  color: Colors
-                                      .white70, //Color.fromRGBO(0, 165, 165, 1.0),
+                                  color: Colors.grey[
+                                      800], //Color.fromRGBO(0, 165, 165, 1.0),
                                 ),
                               ),
                               validator: (val) {
@@ -111,7 +111,7 @@ class _StateSignUp extends State<SignUp> {
                             margin: EdgeInsets.only(top: 20),
                             width: 320,
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.grey[800]),
                               obscureText: _obsecurepsd,
                               decoration: InputDecoration(
                                   border: UnderlineInputBorder(
@@ -127,16 +127,16 @@ class _StateSignUp extends State<SignUp> {
                                               Color.fromRGBO(84, 89, 167, 1.0),
                                           width: 3)),
                                   hintText: 'Choose a Password',
-                                  hintStyle: TextStyle(color: Colors.white70),
+                                  hintStyle: TextStyle(color: Colors.grey[800]),
                                   prefixIcon: Icon(
                                     Icons.lock,
-                                    color: Colors.white70,
+                                    color: Colors.grey[800],
                                   ),
                                   suffixIcon: IconButton(
                                     onPressed: () {
                                       if (eyepressed) {
                                         setState(() {
-                                          _eyecolor = Colors.white70;
+                                          _eyecolor = Colors.grey[800];
                                           eyepressed = false;
                                           _obsecurepsd = true;
                                         });
@@ -167,7 +167,7 @@ class _StateSignUp extends State<SignUp> {
                             margin: EdgeInsets.only(top: 20),
                             width: 320,
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.grey[800]),
                               obscureText: _obsecurepsd,
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
@@ -182,10 +182,10 @@ class _StateSignUp extends State<SignUp> {
                                         color: Color.fromRGBO(84, 89, 167, 1.0),
                                         width: 3)),
                                 hintText: 'Confirm Password',
-                                hintStyle: TextStyle(color: Colors.white70),
+                                hintStyle: TextStyle(color: Colors.grey[800]),
                                 prefixIcon: Icon(
                                   Icons.error_outline,
-                                  color: Colors.white70,
+                                  color: Colors.grey[800],
                                 ),
                               ),
                               validator: (val) {
@@ -254,13 +254,13 @@ class _StateSignUp extends State<SignUp> {
                             margin: EdgeInsets.only(top: 20),
                             child: RaisedButton(
                               elevation: 0,
-                              color: Color.fromRGBO(30, 30, 30, 1.0),
+                              color: Colors.grey[200],
                               onPressed: () {
                                 Navigator.pop(context);
                               },
                               child: Text(
                                 'Already Have an Account?',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.grey[800]),
                               ),
                             ),
                           )

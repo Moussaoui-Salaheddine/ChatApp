@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'signup.dart';
+import 'psdreset.dart';
 
-class SignUp extends StatefulWidget {
+class Log extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _StateSignUp();
+    return _StateLog();
   }
 }
 
-class _StateSignUp extends State<SignUp> {
-  final _formKeysignup = GlobalKey<FormState>();
+class _StateLog extends State<Log> {
+  final _formKeysignin = GlobalKey<FormState>();
   Color _eyecolor = Colors.white70;
   bool eyepressed = false;
   bool _obsecurepsd = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
       backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
+      resizeToAvoidBottomPadding: true,
       body: Container(
         width: 1080,
         height: 1920,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(30, 30, 30, 1.0),
+        ),
         child: ListView(
           children: <Widget>[
             Container(
@@ -35,9 +40,9 @@ class _StateSignUp extends State<SignUp> {
                             fit: BoxFit.fill)),
                   ), //logo
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(top: 70),
                     child: Form(
-                      key: _formKeysignup,
+                      key: _formKeysignin,
                       child: Column(
                         children: <Widget>[
                           Container(
@@ -56,41 +61,7 @@ class _StateSignUp extends State<SignUp> {
                                     borderSide: BorderSide(
                                         color: Color.fromRGBO(84, 89, 167, 1.0),
                                         width: 3)),
-                                hintText: 'Your Email',
-                                hintStyle: TextStyle(color: Colors.white70),
-                                prefixIcon: Icon(
-                                  Icons.mail,
-                                  color: Colors
-                                      .white70, //Color.fromRGBO(0, 165, 165, 1.0),
-                                ),
-                              ),
-                              validator: (val) {
-                                if (val.length == 0) {
-                                  return "enter your email";
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            width: 320,
-                            child: TextFormField(
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromRGBO(84, 89, 167, 1.0),
-                                        width: 3)),
-                                hintText: 'Pick a Username',
+                                hintText: 'Username',
                                 hintStyle: TextStyle(color: Colors.white70),
                                 prefixIcon: Icon(
                                   Icons.person,
@@ -126,7 +97,7 @@ class _StateSignUp extends State<SignUp> {
                                           color:
                                               Color.fromRGBO(84, 89, 167, 1.0),
                                           width: 3)),
-                                  hintText: 'Choose a Password',
+                                  hintText: 'Password',
                                   hintStyle: TextStyle(color: Colors.white70),
                                   prefixIcon: Icon(
                                     Icons.lock,
@@ -164,38 +135,22 @@ class _StateSignUp extends State<SignUp> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 20),
-                            width: 320,
-                            child: TextFormField(
-                              style: TextStyle(color: Colors.white),
-                              obscureText: _obsecurepsd,
-                              decoration: InputDecoration(
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromRGBO(84, 89, 167, 1.0),
-                                        width: 3)),
-                                hintText: 'Confirm Password',
-                                hintStyle: TextStyle(color: Colors.white70),
-                                prefixIcon: Icon(
-                                  Icons.error_outline,
-                                  color: Colors.white70,
-                                ),
-                              ),
-                              validator: (val) {
-                                if (val.length == 0) {
-                                  return "Password cannot be empty";
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
+                            margin: EdgeInsets.only(top: 20, left: 170),
+                            child: RaisedButton(
+                                elevation: 0,
+                                color: Color.fromRGBO(30, 30, 30, 1.0),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new PasswordReset()));
+                                },
+                                child: Text(
+                                  'forgot password?',
+                                  style: TextStyle(color: Colors.grey[600]),
+                                  textAlign: TextAlign.right,
+                                )),
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 40),
@@ -206,7 +161,7 @@ class _StateSignUp extends State<SignUp> {
                               elevation: 8,
                               colorBrightness: Brightness.dark,
                               onPressed: () {
-                                if (_formKeysignup.currentState.validate()) {
+                                if (_formKeysignin.currentState.validate()) {
                                   showDialog<String>(
                                       context: context,
                                       builder: (BuildContext context) =>
@@ -215,11 +170,10 @@ class _StateSignUp extends State<SignUp> {
                                               borderRadius:
                                                   BorderRadius.circular(30.0),
                                             ),
-                                            title:
-                                                Text('Creating your account'),
+                                            title: Text('Signing in'),
                                             content: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 120, right: 120),
+                                                  left: 100, right: 100),
                                               child: CircularProgressIndicator(
                                                 backgroundColor: Color.fromRGBO(
                                                     84, 89, 167, 1.0),
@@ -244,24 +198,41 @@ class _StateSignUp extends State<SignUp> {
                                   borderRadius: BorderRadius.circular(30.0)),
                               textColor: Colors.white,
                               child: Text(
-                                'Signup',
+                                'login',
                                 style: TextStyle(
                                     fontSize: 30, fontFamily: 'Comfortaa'),
                               ),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: RaisedButton(
-                              elevation: 0,
-                              color: Color.fromRGBO(30, 30, 30, 1.0),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                'Already Have an Account?',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                            margin: EdgeInsets.only(top: 25, left: 40),
+                            child: Row(
+                              children: <Widget>[
+                                RaisedButton(
+                                  elevation: 0,
+                                  color: Color.fromRGBO(30, 30, 30, 1.0),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                new SignUp()));
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'don\'t have an account? ',
+                                        style:
+                                            TextStyle(color: Colors.grey[600]),
+                                      ),
+                                      Text(
+                                        'Sign Up',
+                                        style: TextStyle(color: Colors.white),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                           )
                         ],

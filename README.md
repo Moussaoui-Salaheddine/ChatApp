@@ -1,6 +1,6 @@
-# blabla
+# dot
 
-chat
+dot
 
 ## Getting Started
 

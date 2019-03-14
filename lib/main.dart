@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
 import 'package:flutter/services.dart';
+import 'wizard.dart';
 
-void main() {
-  SystemChrome.setEnabledSystemUIOverlays([]);
+//temp import
+import 'chat.dart';
+
+void main()
+{
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: Color.fromRGBO(84, 89, 167, 1.0),
+    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Color.fromRGBO(30, 30, 30, 1.0),
+    systemNavigationBarIconBrightness: Brightness.light,
   ));
-  runApp(new Chat());
+  //SystemChrome.setEnabledSystemUIOverlays([]);
+  runApp(MyApp());
 }
 
-class Chat extends StatelessWidget {
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Color.fromRGBO(255, 0, 169, 1.0),
-        accentColor: Colors.cyan[600],
-        canvasColor: Colors.grey[200],
-        fontFamily: 'Camfortaa',
+        fontFamily: 'Comfortaa'
       ),
       debugShowCheckedModeBanner: false,
-      home: new Login(),
+      home: Wizard(),//Chat(), //Wizard(),
     );
   }
+  
 }
