@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'signup.dart';
 import 'psdreset.dart';
 
@@ -14,6 +15,9 @@ class _StateLog extends State<Log> {
   Color _eyecolor = Colors.white70;
   bool eyepressed = false;
   bool _obsecurepsd = true;
+
+  String _email, _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +65,7 @@ class _StateLog extends State<Log> {
                                     borderSide: BorderSide(
                                         color: Color.fromRGBO(84, 89, 167, 1.0),
                                         width: 3)),
-                                hintText: 'Username',
+                                hintText: 'Email',
                                 hintStyle: TextStyle(color: Colors.white70),
                                 prefixIcon: Icon(
                                   Icons.person,
@@ -71,10 +75,13 @@ class _StateLog extends State<Log> {
                               ),
                               validator: (val) {
                                 if (val.length == 0) {
-                                  return "Username cannot be empty";
+                                  return "Email cannot be empty";
                                 } else {
                                   return null;
                                 }
+                              },
+                              onSaved: (input) {
+                                _email = input;
                               },
                             ),
                           ),
@@ -132,6 +139,9 @@ class _StateLog extends State<Log> {
                                   return null;
                                 }
                               },
+                              onSaved: (input) {
+                                _password = input;
+                              },
                             ),
                           ),
                           Container(
@@ -160,40 +170,7 @@ class _StateLog extends State<Log> {
                               color: Color.fromRGBO(84, 89, 167, 1.0),
                               elevation: 8,
                               colorBrightness: Brightness.dark,
-                              onPressed: () {
-                                if (_formKeysignin.currentState.validate()) {
-                                  showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                            title: Text('Signing in'),
-                                            content: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 100, right: 100),
-                                              child: CircularProgressIndicator(
-                                                backgroundColor: Color.fromRGBO(
-                                                    84, 89, 167, 1.0),
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          84, 89, 167, 1.0)),
-                                                ),
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'cancel'),
-                                              )
-                                            ],
-                                          ));
-                                }
-                              },
+                              onPressed: login,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
                               textColor: Colors.white,
@@ -246,5 +223,42 @@ class _StateLog extends State<Log> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    if (_formKeysignin.currentState.validate()) {
+      _formKeysignin.currentState.save();
+      try {
+      FirebaseUser user=await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email,password: _password);
+        
+        //user.sendEmailVerification();
+      } on Exception catch (e) {
+              print(e);
+      }
+      
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                title: Text('Signing in'),
+                content: Container(
+                  margin: EdgeInsets.only(left: 100, right: 100),
+                  child: CircularProgressIndicator(
+                    backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
+                    ),
+                    onPressed: () => Navigator.pop(context, 'cancel'),
+                  )
+                ],
+              ));
+    }
   }
 }

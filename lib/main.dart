@@ -4,13 +4,15 @@ import 'wizard.dart';
 
 //temp import
 import 'chat.dart';
+import 'home.dart';
 
 void main()
 {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-    statusBarColor: Color.fromRGBO(84, 89, 167, 1.0),
+    //statusBarColor: Color.fromRGBO(84, 89, 167, 1.0),
+    statusBarColor: Color.fromRGBO(45, 42, 111, 1.0),
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: Color.fromRGBO(30, 30, 30, 1.0),
+    systemNavigationBarColor: Color.fromRGBO(84, 89, 167, 1.0),
     systemNavigationBarIconBrightness: Brightness.light,
   ));
   //SystemChrome.setEnabledSystemUIOverlays([]);
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget{
         fontFamily: 'Comfortaa'
       ),
       debugShowCheckedModeBanner: false,
-      home: Wizard(),//Chat(), //Wizard(),
+      home:  Wizard(), //Home(),//Chat(), //Wizard(),
     );
   }
   
