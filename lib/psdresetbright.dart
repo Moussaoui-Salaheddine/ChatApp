@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 class PasswordReset extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class PasswordReset extends StatefulWidget {
 
 class _StatePasswordReset extends State<PasswordReset> {
   final _formKeyreset = GlobalKey<FormState>();
+  String _email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +52,10 @@ class _StatePasswordReset extends State<PasswordReset> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -73,6 +76,9 @@ class _StatePasswordReset extends State<PasswordReset> {
                                   return null;
                                 }
                               },
+                              onSaved: (input) {
+                                _email = input;
+                              },
                             ),
                           ),
                           Container(
@@ -83,40 +89,7 @@ class _StatePasswordReset extends State<PasswordReset> {
                               color: Color.fromRGBO(84, 89, 167, 1.0),
                               elevation: 8,
                               colorBrightness: Brightness.dark,
-                              onPressed: () {
-                                if (_formKeyreset.currentState.validate()) {
-                                  showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                            title: Text('resetting'),
-                                            content: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 100, right: 100),
-                                              child: CircularProgressIndicator(
-                                                backgroundColor: Color.fromRGBO(
-                                                    84, 89, 167, 1.0),
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          84, 89, 167, 1.0)),
-                                                ),
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'cancel'),
-                                              )
-                                            ],
-                                          ));
-                                }
-                              },
+                              onPressed: reset,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
                               textColor: Colors.white,
@@ -137,7 +110,8 @@ class _StatePasswordReset extends State<PasswordReset> {
                               },
                               shape: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40.0),
-                                  borderSide: BorderSide(color: Colors.grey[200])),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200])),
                               child: Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
@@ -157,5 +131,75 @@ class _StatePasswordReset extends State<PasswordReset> {
         ),
       ),
     );
+  }
+
+  Future<void> reset() async {
+    {
+      if (_formKeyreset.currentState.validate()) {
+        _formKeyreset.currentState.save();
+
+        try {
+          FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+
+          //user.sendEmailVerification();
+        } on Exception catch (e) {
+          print(e);
+        }
+
+        showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  title: Text('resetting'),
+                  content: Container(
+                    margin: EdgeInsets.only(left: 100, right: 100),
+                    child: CircularProgressIndicator(
+                      backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        'Cancel',
+                        style:
+                            TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
+                      ),
+                      onPressed: () => Navigator.pop(context, 'cancel'),
+                    )
+                  ],
+                ));
+
+        Future.delayed(const Duration(milliseconds: 4000), () {
+          setState(() {
+            Navigator.pop(context);
+            showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      title: Text('resetting'),
+                      content: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: Text(
+                            'We have sent you an email to reset your password'),
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            'ok',
+                            style: TextStyle(
+                                color: Color.fromRGBO(84, 89, 167, 1.0)),
+                          ),
+                          onPressed: () => Navigator.pop(context, 'ok'),
+                        )
+                      ],
+                    ));
+          });
+        });
+      }
+    }
   }
 }

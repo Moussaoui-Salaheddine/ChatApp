@@ -18,9 +18,11 @@ class _StateWizard extends State<Wizard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
         backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
         body: Container(
-          margin: EdgeInsets.only(top: 50),
+          margin: EdgeInsets.only(top: 20),
           child: DefaultTabController(
             length: 4,
             child: Builder(
@@ -36,7 +38,7 @@ class _StateWizard extends State<Wizard> {
                             child: TabBarView(
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.only(top: 120),
+                                  margin: EdgeInsets.only(top: 80),
                                   child: Column(
                                     children: <Widget>[
                                       Container(

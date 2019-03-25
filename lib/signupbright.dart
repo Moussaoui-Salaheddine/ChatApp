@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class _StateSignUp extends State<SignUp> {
   Color _eyecolor = Colors.grey[800];
   bool eyepressed = false;
   bool _obsecurepsd = true;
+  String _email, _password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +50,10 @@ class _StateSignUp extends State<SignUp> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -71,6 +74,9 @@ class _StateSignUp extends State<SignUp> {
                                   return null;
                                 }
                               },
+                              onSaved: (input) {
+                                _email = input;
+                              },
                             ),
                           ),
                           Container(
@@ -81,10 +87,10 @@ class _StateSignUp extends State<SignUp> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -116,10 +122,10 @@ class _StateSignUp extends State<SignUp> {
                               decoration: InputDecoration(
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.grey[600], width: 3)),
+                                          color: Colors.grey[600], width: 2)),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3),
+                                        color: Colors.grey[600], width: 2),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -161,6 +167,9 @@ class _StateSignUp extends State<SignUp> {
                                   return null;
                                 }
                               },
+                              onSaved: (input) {
+                                _password = input;
+                              },
                             ),
                           ),
                           Container(
@@ -172,10 +181,10 @@ class _StateSignUp extends State<SignUp> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -205,41 +214,7 @@ class _StateSignUp extends State<SignUp> {
                               color: Color.fromRGBO(84, 89, 167, 1.0),
                               elevation: 8,
                               colorBrightness: Brightness.dark,
-                              onPressed: () {
-                                if (_formKeysignup.currentState.validate()) {
-                                  showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                            title:
-                                                Text('Creating your account'),
-                                            content: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 120, right: 120),
-                                              child: CircularProgressIndicator(
-                                                backgroundColor: Color.fromRGBO(
-                                                    84, 89, 167, 1.0),
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          84, 89, 167, 1.0)),
-                                                ),
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'cancel'),
-                                              )
-                                            ],
-                                          ));
-                                }
-                              },
+                              onPressed: signup,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
                               textColor: Colors.white,
@@ -275,5 +250,48 @@ class _StateSignUp extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  Future<void> signup() async {
+    {
+      if (_formKeysignup.currentState.validate()) {
+        _formKeysignup.currentState.save();
+
+        try {
+          FirebaseUser user = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+                  email: _email, password: _password);
+
+          user.sendEmailVerification();
+        } on Exception catch (e) {
+          print(e);
+        }
+
+        showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  title: Text('Creating your account'),
+                  content: Container(
+                    margin: EdgeInsets.only(left: 120, right: 120),
+                    child: CircularProgressIndicator(
+                      backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        'Cancel',
+                        style:
+                            TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
+                      ),
+                      onPressed: () => Navigator.pop(context, 'cancel'),
+                    )
+                  ],
+                ));
+      }
+    }
   }
 }

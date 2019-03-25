@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'signupbright.dart';
 import 'psdresetbright.dart';
 
@@ -14,6 +16,9 @@ class _StateLogBright extends State<LogBright> {
   Color _eyecolor = Colors.grey[800];
   bool eyepressed = false;
   bool _obsecurepsd = true;
+
+  String _email, _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,10 +57,10 @@ class _StateLogBright extends State<LogBright> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -65,7 +70,8 @@ class _StateLogBright extends State<LogBright> {
                                 hintStyle: TextStyle(color: Colors.grey[800]),
                                 prefixIcon: Icon(
                                   Icons.person,
-                                  color: Colors.grey[800], //Color.fromRGBO(0, 165, 165, 1.0),
+                                  color: Colors.grey[
+                                      800], //Color.fromRGBO(0, 165, 165, 1.0),
                                 ),
                               ),
                               validator: (val) {
@@ -74,6 +80,9 @@ class _StateLogBright extends State<LogBright> {
                                 } else {
                                   return null;
                                 }
+                              },
+                              onSaved: (input) {
+                                _email = input;
                               },
                             ),
                           ),
@@ -86,10 +95,10 @@ class _StateLogBright extends State<LogBright> {
                               decoration: InputDecoration(
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.grey[600], width: 3)),
+                                          color: Colors.grey[600], width: 2)),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3),
+                                        color: Colors.grey[600], width: 2),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -131,6 +140,9 @@ class _StateLogBright extends State<LogBright> {
                                   return null;
                                 }
                               },
+                              onSaved: (input) {
+                                _password = input;
+                              },
                             ),
                           ),
                           Container(
@@ -159,40 +171,7 @@ class _StateLogBright extends State<LogBright> {
                               color: Color.fromRGBO(84, 89, 167, 1.0),
                               elevation: 8,
                               colorBrightness: Brightness.dark,
-                              onPressed: () {
-                                if (_formKeysignin.currentState.validate()) {
-                                  showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                            title: Text('Signing in'),
-                                            content: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 100, right: 100),
-                                              child: CircularProgressIndicator(
-                                                backgroundColor: Color.fromRGBO(
-                                                    84, 89, 167, 1.0),
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          84, 89, 167, 1.0)),
-                                                ),
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'cancel'),
-                                              )
-                                            ],
-                                          ));
-                                }
-                              },
+                              onPressed: login,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
                               textColor: Colors.white,
@@ -245,5 +224,43 @@ class _StateLogBright extends State<LogBright> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    if (_formKeysignin.currentState.validate()) {
+      _formKeysignin.currentState.save();
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+
+        //user.sendEmailVerification();
+      } on Exception catch (e) {
+        print(e);
+      }
+
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                title: Text('Signing in'),
+                content: Container(
+                  margin: EdgeInsets.only(left: 100, right: 100),
+                  child: CircularProgressIndicator(
+                    backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
+                    ),
+                    onPressed: () => Navigator.pop(context, 'cancel'),
+                  )
+                ],
+              ));
+    }
   }
 }

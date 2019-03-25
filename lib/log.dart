@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'signup.dart';
 import 'psdreset.dart';
 
@@ -56,10 +57,10 @@ class _StateLog extends State<Log> {
                               decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3)),
+                                        color: Colors.grey[600], width: 2)),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.grey[600], width: 3),
+                                      color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -94,10 +95,10 @@ class _StateLog extends State<Log> {
                               decoration: InputDecoration(
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.grey[600], width: 3)),
+                                          color: Colors.grey[600], width: 2)),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 3),
+                                        color: Colors.grey[600], width: 2),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -229,13 +230,14 @@ class _StateLog extends State<Log> {
     if (_formKeysignin.currentState.validate()) {
       _formKeysignin.currentState.save();
       try {
-      FirebaseUser user=await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email,password: _password);
-        
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+
         //user.sendEmailVerification();
       } on Exception catch (e) {
-              print(e);
+        print(e);
       }
-      
+
       showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -249,7 +251,7 @@ class _StateLog extends State<Log> {
                     backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
                   ),
                 ),
-                actions: <Widget>[
+                actions: <Widget>[ 
                   FlatButton(
                     child: Text(
                       'Cancel',
