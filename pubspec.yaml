@@ -13,6 +13,12 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  google_sign_in: 
+  firebase_analytics: 
+  firebase_database: 
+  firebase_storage: 
+  cloud_firestore:
+  firebase_auth:
   flutter:
     sdk: flutter
 
@@ -43,6 +49,9 @@ flutter:
   - assets/logowink.png
   - assets/logobright.png
   - assets/logodark.png
+  - assets/logonoface.png
+  - assets/mark.png
+  - assets/daft.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -63,6 +72,9 @@ flutter:
    - family: Comfortaa 
      fonts: 
         - asset: fonts/Comfortaa-Bold.ttf
+   - family:  MyFlutterApp
+     fonts:
+        - asset: fonts/MyFlutterApp.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

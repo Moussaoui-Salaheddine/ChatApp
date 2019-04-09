@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'log.dart';
-import 'logbright.dart';
 
 class Wizard extends StatefulWidget {
+  //defining a static getter for the dark theme boolean variable
+  static get darktheme => _StateWizard.darktheme;
+  //defining a static setter for the dark theme boolean variable
+  static set darktheme(bool val) {
+    _StateWizard.darktheme = val;
+  }
   @override
   State<StatefulWidget> createState() {
     return _StateWizard();
@@ -11,16 +16,21 @@ class Wizard extends StatefulWidget {
 }
 
 class _StateWizard extends State<Wizard> {
+  // selectedmode 1 & 2 can distinguish between the two cards and make sure only one is selected
   BorderSide _selectedmode1 = BorderSide();
   BorderSide _selectedmode2 = BorderSide();
   bool _modeselector1 = false;
   bool _modeselector2 = false;
+  //dark theme changing variable
+  static bool darktheme = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
         body: Container(
-          margin: EdgeInsets.only(top: 50),
+          margin: EdgeInsets.only(top: 20),
           child: DefaultTabController(
             length: 4,
             child: Builder(
@@ -36,14 +46,15 @@ class _StateWizard extends State<Wizard> {
                             child: TabBarView(
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.only(top: 120),
+                                  margin: EdgeInsets.only(top: 80),
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: 150,
-                                        height: 150,
+                                        width: 130,
+                                        height: 130,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
+                                                //definded in the file pupspec.yaml
                                                 image: AssetImage(
                                                     'assets/logo.png'),
                                                 fit: BoxFit.fill)),
@@ -57,7 +68,7 @@ class _StateWizard extends State<Wizard> {
                                       ),
                                       Container(
                                         margin: EdgeInsets.only(
-                                            top: 130, left: 250),
+                                            top: 100, left: 250),
                                         width: 60,
                                         height: 60,
                                         child: RaisedButton(
@@ -79,14 +90,15 @@ class _StateWizard extends State<Wizard> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(top: 100),
+                                  margin: EdgeInsets.only(top: 80),
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: 150,
-                                        height: 150,
+                                        width: 130,
+                                        height: 130,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
+                                                //definded in the file pupspec.yaml
                                                 image: AssetImage(
                                                     'assets/logowow.png'),
                                                 fit: BoxFit.fill)),
@@ -164,14 +176,15 @@ class _StateWizard extends State<Wizard> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(top: 100),
+                                  margin: EdgeInsets.only(top: 80),
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: 150,
-                                        height: 150,
+                                        width: 130,
+                                        height: 130,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
+                                                //definded in the file pupspec.yaml
                                                 image: AssetImage(
                                                     'assets/logowink.png'),
                                                 fit: BoxFit.fill)),
@@ -252,7 +265,7 @@ class _StateWizard extends State<Wizard> {
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        margin: EdgeInsets.only(top: 15),
+                                        margin: EdgeInsets.only(top: 40),
                                         child: Text(
                                           'Choose what suits you',
                                           style: TextStyle(color: Colors.white),
@@ -261,7 +274,7 @@ class _StateWizard extends State<Wizard> {
                                       Container(
                                         margin: EdgeInsets.only(top: 30),
                                         width: 350,
-                                        height: 200,
+                                        height: 170,
                                         child: RaisedButton(
                                           onPressed: () {
                                             setState(() {
@@ -290,6 +303,7 @@ class _StateWizard extends State<Wizard> {
                                             margin: EdgeInsets.only(top: 20),
                                             child: Column(
                                               children: <Widget>[
+                                                //definded in the file pupspec.yaml
                                                 Image.asset(
                                                   'assets/logobright.png',
                                                   width: 100,
@@ -313,7 +327,7 @@ class _StateWizard extends State<Wizard> {
                                       Container(
                                         margin: EdgeInsets.only(top: 20),
                                         width: 350,
-                                        height: 200,
+                                        height: 170,
                                         child: RaisedButton(
                                           onPressed: () {
                                             setState(() {
@@ -342,6 +356,7 @@ class _StateWizard extends State<Wizard> {
                                             margin: EdgeInsets.only(top: 20),
                                             child: Column(
                                               children: <Widget>[
+                                                //definded in the file pupspec.yaml
                                                 Image.asset(
                                                   'assets/logodark.png',
                                                   width: 100,
@@ -363,7 +378,7 @@ class _StateWizard extends State<Wizard> {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 60),
+                                        margin: EdgeInsets.only(top: 40),
                                         width: 250,
                                         height: 55,
                                         child: RaisedButton(
@@ -382,7 +397,7 @@ class _StateWizard extends State<Wizard> {
                                                             .copyWith(
                                                   statusBarColor:
                                                       Color.fromRGBO(
-                                                          84, 89, 167, 1.0),
+                                                          30, 30, 30, 1.0),
                                                   statusBarIconBrightness:
                                                       Brightness.light,
                                                   systemNavigationBarColor:
@@ -391,12 +406,19 @@ class _StateWizard extends State<Wizard> {
                                                   systemNavigationBarIconBrightness:
                                                       Brightness.light,
                                                 ));
-                                                SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+                                                SystemChrome
+                                                    .setEnabledSystemUIOverlays(
+                                                        SystemUiOverlay.values);
+                                                Navigator.pop(context);
+                                                setState(() {
+                                                  darktheme = true;
+                                                });
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            new Log()));
+                                                            new Log(
+                                                                darktheme)));
                                               } else {
                                                 SystemChrome
                                                     .setSystemUIOverlayStyle(
@@ -404,21 +426,26 @@ class _StateWizard extends State<Wizard> {
                                                             .dark
                                                             .copyWith(
                                                   statusBarColor:
-                                                      Color.fromRGBO(
-                                                          84, 89, 167, 1.0),
+                                                      Colors.grey[200],
                                                   statusBarIconBrightness:
-                                                      Brightness.light,
+                                                      Brightness.dark,
                                                   systemNavigationBarColor:
                                                       Colors.grey[200],
                                                   systemNavigationBarIconBrightness:
                                                       Brightness.dark,
                                                 ));
-                                                SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+                                                SystemChrome
+                                                    .setEnabledSystemUIOverlays(
+                                                        SystemUiOverlay.values);
+                                                setState(() {
+                                                  darktheme = false;
+                                                });
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            new LogBright()));
+                                                            new Log(
+                                                                darktheme)));
                                               }
                                             } else {
                                               showDialog<String>(

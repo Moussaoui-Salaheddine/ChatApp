@@ -1,39 +1,41 @@
 {
   "project_info": {
-    "project_number": "967787748388",
-    "firebase_url": "https://chatapp-e6bb6.firebaseio.com",
-    "project_id": "chatapp-e6bb6",
-    "storage_bucket": "chatapp-e6bb6.appspot.com"
+    "project_number": "748191987490",
+    "firebase_url": "https://dot-messenger-1999.firebaseio.com",
+    "project_id": "dot-messenger-1999",
+    "storage_bucket": "dot-messenger-1999.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:967787748388:android:098038203f8d3e67",
+        "mobilesdk_app_id": "1:748191987490:android:594fad0271a6bbce",
         "android_client_info": {
-          "package_name": "com.dot"
+          "package_name": "dot.com.dot"
         }
       },
       "oauth_client": [
         {
-          "client_id": "967787748388-3h5eqa6o70120i1u8917jc954da8llta.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "748191987490-omv1fjgvqjbl07ul9nki626kgte9kvav.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dot.com.dot",
+            "certificate_hash": "efdf7ce19ef80a5b525c8b85bc1b6ab015e2e7ec"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBE8eYtjnzJzMqVardgl0i-S6RWOrg2cpI"
+          "current_key": "AIzaSyDJdiDuriqcYsmhTmpOICORIJUVfdjESBE"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748191987490-m184an84rdmjpsqkpfenvcmoc3oii4na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
