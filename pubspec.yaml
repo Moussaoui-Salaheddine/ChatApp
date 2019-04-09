@@ -13,10 +13,13 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+<<<<<<< HEAD
   google_sign_in: 
   firebase_analytics: 
   firebase_database: 
   firebase_storage: 
+=======
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
   cloud_firestore:
   firebase_auth:
   flutter:

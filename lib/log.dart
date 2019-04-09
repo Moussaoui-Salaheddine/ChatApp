@@ -2,8 +2,11 @@ import 'package:dot/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+<<<<<<< HEAD
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/services.dart';
+=======
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
 import 'signup.dart';
 import 'psdreset.dart';
 import 'home.dart';
@@ -55,6 +58,7 @@ class _StateLog extends State<Log> {
               child: ListView(
                 children: <Widget>[
                   Container(
+<<<<<<< HEAD
                     margin: EdgeInsets.only(top: 50, right: 25, left: 25),
                     child: Column(
                       children: <Widget>[
@@ -105,6 +109,81 @@ class _StateLog extends State<Log> {
                                     onSaved: (input) {
                                       _email = input;
                                     },
+=======
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/logo.png'),
+                            fit: BoxFit.fill)),
+                  ), //logo
+                  Container(
+                    margin: EdgeInsets.only(top: 70),
+                    child: Form(
+                      key: _formKeysignin,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 320,
+                            child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey[600], width: 2)),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey[600], width: 2),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(84, 89, 167, 1.0),
+                                        width: 3)),
+                                hintText: 'Email',
+                                hintStyle: TextStyle(color: Colors.white70),
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: Colors
+                                      .white70, //Color.fromRGBO(0, 165, 165, 1.0),
+                                ),
+                              ),
+                              validator: (val) {
+                                if (val.length == 0) {
+                                  return "Email cannot be empty";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              onSaved: (input) {
+                                _email = input;
+                              },
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            width: 320,
+                            child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                              obscureText: _obsecurepsd,
+                              decoration: InputDecoration(
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.grey[600], width: 2)),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey[600], width: 2),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Color.fromRGBO(84, 89, 167, 1.0),
+                                          width: 3)),
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(color: Colors.white70),
+                                  prefixIcon: Icon(
+                                    Icons.lock,
+                                    color: Colors.white70,
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
                                   ),
                                 ),
                                 Container(
@@ -293,6 +372,7 @@ class _StateLog extends State<Log> {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
 
+<<<<<<< HEAD
         showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
@@ -304,6 +384,31 @@ class _StateLog extends State<Log> {
                     margin: EdgeInsets.only(left: 100, right: 100),
                     child: CircularProgressIndicator(
                       backgroundColor: Color.fromRGBO(44, 47, 51, 1.0),
+=======
+        //user.sendEmailVerification();
+      } on Exception catch (e) {
+        print(e);
+      }
+
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                title: Text('Signing in'),
+                content: Container(
+                  margin: EdgeInsets.only(left: 100, right: 100),
+                  child: CircularProgressIndicator(
+                    backgroundColor: Color.fromRGBO(84, 89, 167, 1.0),
+                  ),
+                ),
+                actions: <Widget>[ 
+                  FlatButton(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
                     ),
                   ),
                   actions: <Widget>[

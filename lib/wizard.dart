@@ -26,8 +26,13 @@ class _StateWizard extends State<Wizard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         resizeToAvoidBottomInset: false,
         resizeToAvoidBottomPadding: false,
+=======
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
         backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
         body: Container(
           margin: EdgeInsets.only(top: 20),

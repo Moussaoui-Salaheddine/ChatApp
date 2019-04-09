@@ -1,5 +1,3 @@
-import 'package:dot/main.dart';
-import 'package:dot/wizard.dart';
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,53 +15,14 @@ class _StatePasswordReset extends State<PasswordReset> {
   String _email;
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Theme(
-      data: Wizard.darktheme ? MyApp.themeDataDark : MyApp.themeDataBright,
-      child: Scaffold(
-        resizeToAvoidBottomPadding: true,
-        body: Container(
-          width: 1080,
-          height: 1920,
-          decoration: BoxDecoration(),
-          child: ListView(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 50, right: 25, left: 25),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/logo.png'),
-                              fit: BoxFit.fill)),
-                    ), //logo
-                    Container(
-                      margin: EdgeInsets.only(top: 70),
-                      child: Form(
-                        key: _formKeyreset,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(top: 70),
-                              width: 320,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey[600], width: 1)),
-                                  enabledBorder: UnderlineInputBorder(
-=======
     return Scaffold(
-      backgroundColor: Color.fromRGBO(30, 30, 30, 1.0),
+      backgroundColor: Colors.grey[200],
       resizeToAvoidBottomPadding: true,
       body: Container(
         width: 1080,
         height: 1920,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(30, 30, 30, 1.0),
+          color: Colors.grey[200],
         ),
         child: ListView(
           children: <Widget>[
@@ -99,69 +58,17 @@ class _StatePasswordReset extends State<PasswordReset> {
                                       color: Colors.grey[600], width: 2),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
->>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
                                     borderSide: BorderSide(
-                                        color: Colors.grey[600], width: 1),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              Color.fromRGBO(84, 89, 167, 1.0),
-                                          width: 3)),
-                                  hintText: 'Your Email',
-                                  prefixIcon: Icon(
-                                    Icons.mail,
-                                    //Color.fromRGBO(0, 165, 165, 1.0),
-                                  ),
-                                ),
-                                validator: (val) {
-                                  if (val.length == 0) {
-                                    return "Please enter your Email";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (input) {
-                                  _email = input;
-                                },
-                              ),
-<<<<<<< HEAD
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 70),
-                              width: 250,
-                              height: 55,
-                              child: RaisedButton(
-                                color: Color.fromRGBO(84, 89, 167, 1.0),
-                                elevation: 8,
-                                colorBrightness: Brightness.dark,
-                                onPressed: reset,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0)),
-                                child: Text(
-                                  'Reset',
-                                  style: TextStyle(
-                                      fontSize: 30, fontFamily: 'Comfortaa'),
+                                        color: Color.fromRGBO(84, 89, 167, 1.0),
+                                        width: 3)),
+                                hintText: 'Your Email',
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                prefixIcon: Icon(
+                                  Icons.mail,
+                                  color: Colors.grey[
+                                      800], //Color.fromRGBO(0, 165, 165, 1.0),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 70),
-                              width: 60,
-                              height: 60,
-                              child: RaisedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                shape: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0)),
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.white,
-                                  size: 28,
-                                ),
-                                color: Color.fromRGBO(84, 89, 167, 1.0),
-=======
                               validator: (val) {
                                 if (val.length == 0) {
                                   return "Please enter your Email";
@@ -202,23 +109,25 @@ class _StatePasswordReset extends State<PasswordReset> {
                                 Navigator.pop(context);
                               },
                               shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(40.0)),
+                                  borderRadius: BorderRadius.circular(40.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200])),
                               child: Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
                                 size: 28,
->>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
                               ),
-                            )
-                          ],
-                        ),
+                              color: Color.fromRGBO(84, 89, 167, 1.0),
+                            ),
+                          )
+                        ],
                       ),
-                    ) //form
-                  ],
-                ),
-              )
-            ],
-          ),
+                    ),
+                  ) //form
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -266,7 +175,6 @@ class _StatePasswordReset extends State<PasswordReset> {
           setState(() {
             Navigator.pop(context);
             showDialog<String>(
-<<<<<<< HEAD
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                       shape: RoundedRectangleBorder(
@@ -289,29 +197,6 @@ class _StatePasswordReset extends State<PasswordReset> {
                         )
                       ],
                     ));
-=======
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  title: Text('resetting'),
-                  content: Container(
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Text('We have sent you an email to reset your password'),
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text(
-                        'ok',
-                        style:
-                            TextStyle(color: Color.fromRGBO(84, 89, 167, 1.0)),
-                      ),
-                      onPressed: () => Navigator.pop(context, 'ok'),
-                    )
-                  ],
-                ));
->>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
           });
         });
       }

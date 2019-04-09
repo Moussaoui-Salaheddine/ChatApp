@@ -15,12 +15,17 @@
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "748191987490-omv1fjgvqjbl07ul9nki626kgte9kvav.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "dot.com.dot",
             "certificate_hash": "efdf7ce19ef80a5b525c8b85bc1b6ab015e2e7ec"
           }
+=======
+          "client_id": "748191987490-m184an84rdmjpsqkpfenvcmoc3oii4na.apps.googleusercontent.com",
+          "client_type": 3
+>>>>>>> c3114715b4aedd832801b2b8e402642dacae7074
         }
       ],
       "api_key": [
